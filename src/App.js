@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ToDoMain from './ToDoMain.js';
+
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <header>
+          <h1>My Super Awesome 100% Original TODO App!</h1>
+          <h4>Now with 25% MORE TODOs!</h4>
+        </header>
+        <hr/>
+        <Router>
+            <Route exact path="/" component={ ToDoMain }/>
+        </Router>
+        
+      </div>
+    )
+  }
 }
 
-export default App;
