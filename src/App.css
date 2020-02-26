@@ -1,4 +1,11 @@
+.body{
+  text-align: center;
+}
 
+fieldset{
+  width: 300px;
+  text-align: center;
+}
 header{
   text-align: center;
 }

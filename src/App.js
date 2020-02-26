@@ -11,7 +11,7 @@ import ToDoMain from './ToDoMain.js';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="body">
         <header>
           <h1>My Super Awesome 100% Original TODO App!</h1>
           <h4>Now with 25% MORE TODOs!</h4>
