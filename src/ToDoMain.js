@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import ToDoList from './ToDoList.js'
+
+
 //shortid for generating ID's
 const shortid = require('shortid');
 
@@ -36,9 +39,12 @@ export default class ToDo extends Component {
             <div>
                 <input value={this.todoInput} onChange={this.handleInput} />
                 <button onClick={this.handleClick}>ADD</button>
-                <fieldset>
-                    <legend>Shit I Gotta Do!</legend>
-                </fieldset>
+                <div id="todoForm">
+                    <fieldset>
+                        <legend>Shit I Gotta Do!</legend>
+                        <ToDoList/>
+                    </fieldset>
+                </div>
             </div>
             
         )

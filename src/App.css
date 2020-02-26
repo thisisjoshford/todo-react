@@ -10,3 +10,13 @@ header{
   text-align: center;
 }
 
+li{
+  text-align: left;
+}
+
+#todoForm{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
