@@ -42,7 +42,7 @@ export default class ToDo extends Component {
                 <div id="todoForm">
                     <fieldset>
                         <legend>Shit I Gotta Do!</legend>
-                        <ToDoList/>
+                        <ToDoList todos={this.state.todos}/>
                     </fieldset>
                 </div>
             </div>
