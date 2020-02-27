@@ -41,6 +41,7 @@ export default class ToDo extends Component {
 
     handleInput = (e) => { this.setState({ todoInput: e.target.value})};
 
+    handleLogout = (e) => {localStorage.clear(); window.location = ('/')};
 
     render() {
         return (
@@ -53,6 +54,7 @@ export default class ToDo extends Component {
                         <ToDoList todos={this.state.todos}/>
                     </fieldset>
                 </div>
+                <button onClick={this.handleLogout}>LOGOUT</button>
             </div>
             
         )

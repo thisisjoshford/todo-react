@@ -28,7 +28,6 @@ export default class App extends Component {
               : <Redirect to='login'/>
             }/>
             <Route path='/login' component = { Login } />
-            {/* // <Route exact path="/" component={ ToDoMain }/> */}
         </Router>
         
       </div>
