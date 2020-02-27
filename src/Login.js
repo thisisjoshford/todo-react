@@ -34,28 +34,35 @@ export default class Login extends Component {
         return (
             <div>
                 <div>
+                    <h2>LOGIN</h2> 
+                    <input 
+                    value={ this.state.userSignIn}
+                    placeholder="email address..." 
+                    onChange={(e) => this.setState({ userSignIn: e.target.value})} />
+
+                    <input value={ this.state.passwordSignIn} 
+                    placeholder="password..." 
+                    type="password" 
+                    onChange={(e) => this.setState({ passwordSignIn: e.target.value})} />
+
+                    <button onClick={this.handleSignIn}>
+                        Sign in
+                    </button>
+                    
+                    <h3>Not a User yet?  Sign UP!</h3>    
                     <input 
                     value={ this.state.userSignUp} 
+                    placeholder="email address..." 
                     onChange={(e) => this.setState({ userSignUp: e.target.value})} />
                     <input 
-                    value={ this.state.passwordSignUp} 
+                    value={ this.state.passwordSignUp}
+                    placeholder="password..." 
+                    type="password" 
                     onChange={(e) => this.setState({ passwordSignUp: e.target.value})} />
 
                     <button onClick={ this.handleSignUp }>
                         Sign up
                     </button>  
-                    <br/>
-
-                    <input 
-                    value={ this.state.userSignIn} 
-                    onChange={(e) => this.setState({ userSignIn: e.target.value})} />
-
-                    <input value={ this.state.passwordSignIn} 
-                    onChange={(e) => this.setState({ passwordSignIn: e.target.value})} />
-
-                    <button onClick={this.handleSignIn}>
-                        Sign in
-                    </button>     
                 </div>
             </div>
         )
