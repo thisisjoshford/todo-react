@@ -12,7 +12,7 @@ export default class Login extends Component {
     }
 
     handleSignIn = async () => {
-        const signIn = await request.post(`http://https://shielded-eyrie-03811.herokuapp.com/api/auth/signin`, {
+        const signIn = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signin`, {
             email: this.state.userSignIn,
             password: this.state.passwordSignIn,
         })
@@ -21,6 +21,15 @@ export default class Login extends Component {
     }
 
     handleSignUp = async () => {
+        if(!this.state.userSignUp || !this.state.passwordSignUp){
+            alert('Yo!  You gotta enter a valid username and password!!!');
+            return;
+        }
+        const user = {
+            email: this.state.userSignUp,
+            password: this.state.passwordSignUp
+        }
+
         const signUp = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signup`, {
             email: this.state.userSignUp,
             password: this.state.passwordSignUp,
@@ -29,7 +38,6 @@ export default class Login extends Component {
         this.props.history.push('/');
     }
      
-
     render() {
         return (
             <div>
@@ -48,7 +56,7 @@ export default class Login extends Component {
                     <button onClick={this.handleSignIn}>
                         Sign in
                     </button>
-                    
+            
                     <h3>Not a User yet?  Sign UP!</h3>    
                     <input 
                     value={ this.state.userSignUp} 
