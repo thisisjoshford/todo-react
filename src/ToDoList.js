@@ -13,12 +13,20 @@ export default class ToDoList extends Component {
                             <input 
                                 type="checkbox" 
                                 name="task"
+                                className="checkbox"
                                 checked={todo.complete}
-                                onChange={ () => this.props.changeTodo(todo) }
+                                onChange={ () => this.props.change(todo) }
                             /> 
                         </td>
-                        <td>
+                        <td className={todo.complete ? 'complete' : 'incomplete'}>
                             {todo.task}
+                        </td>
+                        <td>
+                            <button 
+                            className="delete"
+                            onClick={ () => this.props.delete(todo) }
+                            >
+                            </button>
                         </td>
                     </tr>
             ))

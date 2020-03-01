@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import request from 'superagent'
 import ToDoList from './ToDoList.js'
+import ErrorBoundary from './ErrorBoundary.js';
 
 
 
@@ -57,10 +58,18 @@ export default class ToDo extends Component {
         .set('Authorization', user.token);
     }
 
-    handleDelete = async() => {
+    handleDelete = async(todo) => {
+        const newTodos = this.state.todos.slice();
+        const todoMatch = newTodos.find((thisTodo) => todo.id === thisTodo.id);
+        const indexOfTodo = this.state.todos.findIndex(thisTodo => todo.id === thisTodo.id);
+        console.log(todoMatch)
+        console.log(indexOfTodo)
+        
         const user = JSON.parse(localStorage.getItem('user'));
-        // const deleteTodo = await request.delete(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signin/api/todos${todo.Id}`)
-        // .set('Authorization', user.token);
+        newTodos.splice(indexOfTodo, 1);
+        this.setState({ todos: newTodos});
+        const data = await request.delete(`https://shielded-eyrie-03811.herokuapp.com/api/todos/${todo.id}`, todoMatch)
+        .set('Authorization', user.token);
     }
 
     handleInput = (e) => { this.setState({ todoInput: e.target.value})};
@@ -80,14 +89,20 @@ export default class ToDo extends Component {
                         <legend>Shit I Gotta Crush Out!</legend>
                         <table>
                             <tr>
-                                <th>Crushed?</th>
-                                <th>Thing to Crush</th>
+                                <th id="crushed">Crushed?</th>
+                                <th id="thingsTodo">Thing to Crush</th>
+                                <th id="delete">Delete</th>
                             </tr>
-                            <ToDoList todos={this.state.todos} changeTodo={this.handleChange}/>
+                            <ErrorBoundary>
+                                <ToDoList 
+                                    todos={this.state.todos} 
+                                    change={this.handleChange}
+                                    delete={this.handleDelete}
+                                />
+                            </ErrorBoundary>
                         </table> 
                     </fieldset>
                 </div>
-                <button onCLick={this.handleDelete}>DELETE SELECTED</button>
                 <br></br>
                 <button onClick={this.handleLogout}>LOGOUT</button>
             </div>

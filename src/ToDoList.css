@@ -3,3 +3,34 @@ legend{
     font-weight: 700;
 }
 
+.complete {
+    text-decoration: line-through !important;
+  }
+
+
+
+img {
+    width: 25px;
+}
+
+button.delete{
+    border: 0;
+    background: url('./delete.png') no-repeat;
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+input[type='checkbox']:checked {
+    background: url('./checked.png') no-repeat;
+    background-size: 17px 17px;
+}

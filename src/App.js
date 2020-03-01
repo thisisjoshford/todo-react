@@ -24,6 +24,7 @@ export default class App extends Component {
         <hr/>
        
           <Router>
+            <ErrorBoundary>
                 <Route path="/" render={() =>
                 isLoggedIn() 
                   ? <Route exact path="/" component={ ToDoMain }/>
@@ -31,6 +32,7 @@ export default class App extends Component {
                 }/>
              
                 <Route path='/login' component = { Login } />
+            </ErrorBoundary>
           </Router>
       
         
