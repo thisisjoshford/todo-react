@@ -22,12 +22,12 @@ export default class App extends Component {
         </header>
         <hr/>
         <Router>
-            <Route path="/" render={() =>
-            isLoggedIn() 
-              ? <Route exact path="/" component={ ToDoMain }/>
-              : <Redirect to='login'/>
-            }/>
-            <Route path='/login' component = { Login } />
+              <Route path="/" render={() =>
+              isLoggedIn() 
+                ? <Route exact path="/" component={ ToDoMain }/>
+                : <Redirect to='login'/>
+              }/>
+              <Route path='/login' component = { Login } />
         </Router>
         
       </div>

@@ -12,6 +12,10 @@ export default class Login extends Component {
     }
 
     handleSignIn = async () => {
+        if(!this.state.userSignIn || !this.state.passwordSignIn){
+            alert('Yo!  You gotta enter a valid username and password!!!');
+            return;
+        }
         const signIn = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signin`, {
             email: this.state.userSignIn,
             password: this.state.passwordSignIn,
@@ -44,14 +48,17 @@ export default class Login extends Component {
                 <div>
                     <h2>LOGIN</h2> 
                     <input 
-                    value={ this.state.userSignIn}
-                    placeholder="email address..." 
-                    onChange={(e) => this.setState({ userSignIn: e.target.value})} />
+                        value={ this.state.userSignIn}
+                        placeholder="email address..." 
+                        onChange={(e) => this.setState({ userSignIn: e.target.value})} 
+                    />
 
-                    <input value={ this.state.passwordSignIn} 
-                    placeholder="password..." 
-                    type="password" 
-                    onChange={(e) => this.setState({ passwordSignIn: e.target.value})} />
+                    <input 
+                        value={ this.state.passwordSignIn} 
+                        placeholder="password..." 
+                        type="password" 
+                        onChange={(e) => this.setState({ passwordSignIn: e.target.value})} 
+                    />
 
                     <button onClick={this.handleSignIn}>
                         Sign in
@@ -59,14 +66,17 @@ export default class Login extends Component {
             
                     <h3>Not a User yet?  Sign UP!</h3>    
                     <input 
-                    value={ this.state.userSignUp} 
-                    placeholder="email address..." 
-                    onChange={(e) => this.setState({ userSignUp: e.target.value})} />
+                        value={ this.state.userSignUp} 
+                        placeholder="email address..." 
+                        onChange={(e) => this.setState({ userSignUp: e.target.value})} 
+                    />
+                    
                     <input 
-                    value={ this.state.passwordSignUp}
-                    placeholder="password..." 
-                    type="password" 
-                    onChange={(e) => this.setState({ passwordSignUp: e.target.value})} />
+                        value={ this.state.passwordSignUp}
+                        placeholder="password..." 
+                        type="password" 
+                        onChange={(e) => this.setState({ passwordSignUp: e.target.value})} 
+                    />
 
                     <button onClick={ this.handleSignUp }>
                         Sign up

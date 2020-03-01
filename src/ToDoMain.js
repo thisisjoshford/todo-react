@@ -8,26 +8,33 @@ const shortid = require('shortid');
 
 export default class ToDo extends Component {
 
+    //initializing state to an empty array
     state = { todos: []}
 
+    //when this component mounts... do the stuff
     componentDidMount = async() => {
+        //get the user from local storage
         const user = JSON.parse(localStorage.getItem('user'));
+        //hit the api with the user token and update state with that users todos on the backend
         const todos = await request.get('https://shielded-eyrie-03811.herokuapp.com/api/todos').set('Authorization', user.token);
-
         this.setState({ todos: todos.body })
     }
 
-    handleClick = async() => {
+    //defining the add a todo method
+    handleAddTodo = async() => {
+        //a new todo will consist of an ID randomly created with shortid npm library, the todo "task" and default state of todo 
         const newTodo = {
             id: shortid.generate(),
             task: this.state.todoInput,
             complete: false
         };
-
+        //get the userinfo from the todos
         const user = JSON.parse(localStorage.getItem('user'));
 
+        //newTodos array is now created by grabbing all the old todos (spread array/props function) and adding the newest todo
         const newTodos = [...this.state.todos, newTodo];
 
+        //update the todos state to the new array of todos and hit the back end with that data
         this.setState({ todos: newTodos});
         const data = await request.post('https://shielded-eyrie-03811.herokuapp.com/api/todos', {
             task: this.state.todoInput
@@ -46,9 +53,12 @@ export default class ToDo extends Component {
     render() {
         return (
             <div>
+
                 <input value={this.todoInput} onChange={this.handleInput} />
-                <button onClick={this.handleClick}>ADD</button>
-                <div id="todoForm">
+
+                <button onClick={this.handleAddTodo}>ADD</button>
+
+                <div id="todoList">
                     <fieldset>
                         <legend>Shit I Gotta Do!</legend>
                         <ToDoList todos={this.state.todos}/>
