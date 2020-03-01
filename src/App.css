@@ -7,7 +7,7 @@ button{
 }
 
 fieldset{
-  width: 300px;
+  width: 333px;
   text-align: center;
 }
 header{
@@ -26,5 +26,9 @@ li{
 
 input{
   cursor: pointer;
+  margin-right: 10px;
 }
 
+th{
+  text-decoration: underline;
+}

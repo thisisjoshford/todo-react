@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ToDo from './ToDoMain'
+import './ToDoList.css'
 
 
 export default class ToDoList extends Component {
@@ -7,11 +8,19 @@ export default class ToDoList extends Component {
 
     render() {
         const todoElements = this.props.todos.map((todo => 
-            <div>
-                 <li>{todo.task}</li>
-                 <input type="checkbox" name="task" onChange=""/>
-            </div>
-           
+                    <tr>
+                        <td> 
+                            <input 
+                                type="checkbox" 
+                                name="task"
+                                checked={todo.complete}
+                                onChange={ () => this.props.changeTodo(todo) }
+                            /> 
+                        </td>
+                        <td>
+                            {todo.task}
+                        </td>
+                    </tr>
             ))
         return ( todoElements )
     }

@@ -11,6 +11,14 @@ export default class Login extends Component {
         passwordSignUp: ''
     }
 
+    componentDidCatch(error, info) {
+        // Display fallback UI
+        this.setState({ hasError: true });
+        // You can also log the error to an error reporting service
+        alert(error, info);
+      }
+    
+
     handleSignIn = async () => {
         if(!this.state.userSignIn || !this.state.passwordSignIn){
             alert('Yo!  You gotta enter a valid username and password!!!');

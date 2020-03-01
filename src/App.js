@@ -9,6 +9,7 @@ import {
 
 import Login from './Login.js';
 import ToDoMain from './ToDoMain.js';
+import ErrorBoundary from './ErrorBoundary.js'
 
 const isLoggedIn = () => JSON.parse(localStorage.getItem('user'));
 
@@ -21,14 +22,17 @@ export default class App extends Component {
           <h4>Now with 25% MORE TODOs!</h4>
         </header>
         <hr/>
-        <Router>
-              <Route path="/" render={() =>
-              isLoggedIn() 
-                ? <Route exact path="/" component={ ToDoMain }/>
-                : <Redirect to='login'/>
-              }/>
-              <Route path='/login' component = { Login } />
-        </Router>
+       
+          <Router>
+                <Route path="/" render={() =>
+                isLoggedIn() 
+                  ? <Route exact path="/" component={ ToDoMain }/>
+                  : <Redirect to='login'/>
+                }/>
+             
+                <Route path='/login' component = { Login } />
+          </Router>
+      
         
       </div>
     )
