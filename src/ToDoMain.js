@@ -37,11 +37,17 @@ export default class ToDo extends Component {
         const newTodos = [...this.state.todos, newTodo];
 
         //update the todos state to the new array of todos and hit the back end with that data
-        this.setState({ todos: newTodos});
-        const data = await request.post('https://shielded-eyrie-03811.herokuapp.com/api/todos', {
-            task: this.state.todoInput
-        })
-            .set('Authorization', user.token);
+        try{
+            this.setState({ todos: newTodos});
+            const data = await request.post('https://shielded-eyrie-03811.herokuapp.com/api/todos', {
+                task: this.state.todoInput
+            })
+                .set('Authorization', user.token);
+        }catch(err) {
+            alert('Oops! Something went wrong... click to refresh');
+            window.location.reload();
+        }
+       
     }
 
     handleChange = async(todo) => {
@@ -52,10 +58,16 @@ export default class ToDo extends Component {
         todoMatch.complete = !todo.complete
         console.log(todoMatch.complete)
 
-        const user = JSON.parse(localStorage.getItem('user'));
-        this.setState({ todos: newTodos});
-        const data = await request.put(`https://shielded-eyrie-03811.herokuapp.com/api/todos/${todo.id}`, todoMatch)
-        .set('Authorization', user.token);
+        try{
+            const user = JSON.parse(localStorage.getItem('user'));
+            this.setState({ todos: newTodos});
+            const data = await request.put(`https://shielded-eyrie-03811.herokuapp.com/api/todos/${todo.id}`, todoMatch)
+            .set('Authorization', user.token);
+        }catch(err){
+            alert('Oops! Something went wrong... click to refresh');
+            window.location.reload();
+        }
+        
     }
 
     handleDelete = async(todo) => {
@@ -64,12 +76,17 @@ export default class ToDo extends Component {
         const indexOfTodo = this.state.todos.findIndex(thisTodo => todo.id === thisTodo.id);
         console.log(todoMatch)
         console.log(indexOfTodo)
-        
-        const user = JSON.parse(localStorage.getItem('user'));
-        newTodos.splice(indexOfTodo, 1);
-        this.setState({ todos: newTodos});
-        const data = await request.delete(`https://shielded-eyrie-03811.herokuapp.com/api/todos/${todo.id}`, todoMatch)
-        .set('Authorization', user.token);
+        try{
+            const user = JSON.parse(localStorage.getItem('user'));
+            newTodos.splice(indexOfTodo, 1);
+            this.setState({ todos: newTodos});
+            const data = await request.delete(`https://shielded-eyrie-03811.herokuapp.com/api/todos/${todo.id}`, todoMatch)
+            .set('Authorization', user.token);
+        }catch(err){
+            alert('Oops! Something went wrong... click to refresh');
+            window.location.reload();
+        }
+      
     }
 
     handleInput = (e) => { this.setState({ todoInput: e.target.value})};

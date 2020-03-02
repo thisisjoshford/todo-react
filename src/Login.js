@@ -11,25 +11,24 @@ export default class Login extends Component {
         passwordSignUp: ''
     }
 
-    componentDidCatch(error, info) {
-        // Display fallback UI
-        this.setState({ hasError: true });
-        // You can also log the error to an error reporting service
-        alert(error, info);
-      }
-    
-
     handleSignIn = async () => {
         if(!this.state.userSignIn || !this.state.passwordSignIn){
             alert('Yo!  You gotta enter a valid username and password!!!');
             return;
         }
-        const signIn = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signin`, {
-            email: this.state.userSignIn,
-            password: this.state.passwordSignIn,
-        })
-        localStorage.setItem('user', JSON.stringify(signIn.body));
-        this.props.history.push('/');
+        try{
+            const signIn = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signin`, {
+                email: this.state.userSignIn,
+                password: this.state.passwordSignIn,
+            })
+            localStorage.setItem('user', JSON.stringify(signIn.body));
+            this.props.history.push('/');
+
+        } catch(err){
+            alert('Invalid Password')
+        }
+       
+    
     }
 
     handleSignUp = async () => {
@@ -41,13 +40,17 @@ export default class Login extends Component {
             email: this.state.userSignUp,
             password: this.state.passwordSignUp
         }
-
-        const signUp = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signup`, {
-            email: this.state.userSignUp,
-            password: this.state.passwordSignUp,
-        })
-        localStorage.setItem('user', JSON.stringify(signUp.body));
-        this.props.history.push('/');
+        try {
+            const signUp = await request.post(`https://shielded-eyrie-03811.herokuapp.com/api/auth/signup`, {
+                email: this.state.userSignUp,
+                password: this.state.passwordSignUp,
+            })
+            localStorage.setItem('user', JSON.stringify(signUp.body));
+            this.props.history.push('/');
+        } catch(err){
+            alert('Invalid UserName / Password')
+        }
+       
     }
      
     render() {
